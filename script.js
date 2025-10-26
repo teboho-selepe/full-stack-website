@@ -11,14 +11,17 @@ const alertBox = document.querySelector('.alert-box');
 registerLink.addEventListener('click', () => authModal.classList.add('slide'));
 loginLink.addEventListener('click', () => authModal.classList.remove('slide'));
 
-loginBtnModal.addEventListener('click', () => authModal.classList.add('show'));
+if (loginBtnModal) loginBtnModal.addEventListener('click', () => authModal.classList.add('show'));
 closeBtnModal.addEventListener('click', () => authModal.classList.remove('show', 'slide'));
 
-avatarCicle.addEventListener('click', () => profileBox.classList.toggle('show'));
+if (avatarCicle) avatarCicle.addEventListener('click', () => profileBox.classList.toggle('show'));
 
-setTimeout(() => alertBox.classList.add('show'), 50);
+if(alertBox){
+    
+    setTimeout(() => alertBox.classList.add('show'), 50);
 
-setTimeout(() => {
-    alertBox.classList.remove('show');
-    setTimeout(() => alertBox.remove(), 1000);
-}, 6000);
+    setTimeout(() => {
+        alertBox.classList.remove('show');
+        setTimeout(() => alertBox.remove(), 1000);
+    }, 6000);
+}
