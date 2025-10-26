@@ -19,13 +19,30 @@
         </nav>
 
         <div class="user-auth">
-            <button type="button" class="login-btn-modal">Login</button>
+            <div class="profile-box" style="display: none;">
+                <div class="avatar-cicle">C</div>
+
+                <div class="dropdown">
+                    <a href="#">My Account</a>
+                    <a href="#">Logout</a>
+                </div>
+
+            </div>
+            
+            <button type="button" class="login-btn-modal" >Login</button>
         </div>
     </header>
 
     <section>
         <h1>Hello World!</h1>
     </section>
+
+    <div class="alert-box" style="display: none;">
+        <div class="alert success">
+            <i class='bx  bxs-checkbox-checked'  ></i>
+            <span>Registration Successful</span> 
+        </div>
+    </div>
 
     <div class="auth-modal">
 

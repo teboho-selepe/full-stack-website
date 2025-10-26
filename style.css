@@ -87,7 +87,7 @@ section h1{
     align-items: center;
     overflow: hidden;
     transform: scale(0);
-    transition: height .2s ease;
+    transition: height .2s ease, transform .2s ease;
 }
 
 .auth-modal.show{
@@ -201,4 +201,118 @@ section h1{
     z-index: 1;
     
 }
+
+.profile-box .avatar-cicle{
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 25px;
+    color: #222;
+    font-weight: 600;
+ 
+}
+
+.profile-box.show .dropdown{
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: aouto;
+
+}
+
+.profile-box .dropdown{
+    position: absolute;
+    top: 85px;
+    right: 100px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.profile-box .dropdown a{
+    padding: 6px 12px;
+    text-decoration: none;
+    color: #222;
+    border-radius: 4px;
+    font-weight: 500;
+    margin: 2px 0;
+    transition: .2s;
+}
+
+.profile-box .dropdown a:hover{
+    background: #eee;
+}
+
+.alert-box{
+    position: fixed;
+    inset: 0;
+    top:35px;
+    margin: 0 auto;
+    width: 350px;
+    height: 70px;
+    background: #fff;
+    border-radius: 6px;
+    padding: 0 15px;
+    z-index: 100;
+    overflow: hidden;
+    transform: translateY(calc(-100% - 35px));
+    transition: .5s ease;
+
+}
+
+.alert-box.show{
+    transform: translateY(0);
+    
+}
+
+.alert{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: #222;
+    font-weight: 500;
+}
+
+.alert::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #0abf30;
+    animation: progress 6s linear forwards;
+}
+
+.alert.error::after{
+    background: #f00;
+}
+
+
+@keyframes progress{
+    100%{
+        width: 0;
+    }
+}
+
+
+.alert i{
+   font-size: 35px;
+   color: #0abf30;
+   margin-right: 8px;
+}
+
+.alert.error i{
+    color: #f00;
+}
+
 
