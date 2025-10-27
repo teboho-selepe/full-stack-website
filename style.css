@@ -216,40 +216,17 @@ section h1{
  
 }
 
-.profile-box.show .dropdown{
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: aouto;
-
-}
-
 .profile-box .dropdown{
     position: absolute;
-    top: 85px;
-    right: 100px;
-    padding: 10px;
+    top: 60px;
+    right: 0;
+    width: 150px;
     background: #fff;
     border-radius: 8px;
-    display: flex;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    overflow: hidden;
+    display: none;
     flex-direction: column;
-    transform: translateY(20px);
-    opacity: 0;
-    pointer-events: none;
-    transition: .5s;
-}
-
-.profile-box .dropdown a{
-    padding: 6px 12px;
-    text-decoration: none;
-    color: #222;
-    border-radius: 4px;
-    font-weight: 500;
-    margin: 2px 0;
-    transition: .2s;
-}
-
-.profile-box .dropdown a:hover{
-    background: #eee;
 }
 
 .alert-box{
