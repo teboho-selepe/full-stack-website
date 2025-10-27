@@ -38,7 +38,7 @@ if ($name !== null) $_SESSION['name'] = $name;  // Retain name in session if log
 
                 <div class="dropdown">
                     <a href="#">My Account</a>
-                    <a href="#">Logout</a>
+                    <a href="logout.php">Logout</a>
                 </div>
 
             </div>
