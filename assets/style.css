@@ -15,7 +15,7 @@ header {
     display: flex;
     align-items: center;
     z-index: 99;
-    background: #222;
+    background: rgba(3, 3, 3, 0.8);
     backdrop-filter: blur(20px); 
 }
 
@@ -32,6 +32,30 @@ nav a {
     text-decoration: none;
     margin-left: 40px;
     font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+    transition: color 180ms ease, transform 180ms ease;
+}
+
+/* animated underline */
+nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0;
+    background: #fff;
+    transition: width 260ms cubic-bezier(.2,.9,.2,1);
+}
+
+nav a:hover {
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+nav a:hover::after {
+    width: 100%;
 }
 
 .user-auth{
@@ -58,12 +82,13 @@ nav a {
 
 section{
     min-height: 100vh;
-    background: url('bakground.jpg') no-repeat;
+    background: url('background2.jpg') no-repeat;
     background-size: cover;
     background-position: center;
     padding: 0 100px;
-
 }
+
+
 
 
 
@@ -299,5 +324,203 @@ section{
 .alert.error i{
     color: #f00;
 }
+
+
+/*  */
+
+/* --- HERO SECTION --- */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 40px;
+  align-items: center;
+  padding: 60px;
+}
+
+.hero h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #003366; /* Dark navy */
+  margin: 0 0 15px;
+}
+
+.hero p {
+  font-size: 16px;
+  color: #667085; /* Muted text */
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.cta {
+  background: #007bff; /* Primary Blue */
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.cta:hover {
+  background: #005fcc;
+}
+
+/* --- FEATURES ROW --- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.feature {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.feature:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+.feature h4 {
+  margin-bottom: 8px;
+  color: #003366;
+}
+
+.muted {
+  color: #667085;
+  font-size: 14px;
+}
+
+/* --- RIGHT SIDE CARD --- */
+.card {
+  background: #f5f9ff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.services {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.card .feature {
+  border: none;
+  background: white;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #f9fbfd;
+    height: 50vh;
+}
+
+.testimonials h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #0a1435;
+}
+
+.testimonial-cards {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.testimonial-cards .card {
+    background: #fff;
+    padding: 1.5rem;
+    width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    text-align: center;
+    border: 1px solid rgba(10,20,40,0.05);
+}
+
+.testimonial-cards .card img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid #4CAF50; /* matches green brand color */
+}
+
+.testimonial-cards .card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 0.8rem;
+}
+
+.testimonial-cards .card strong {
+    color: #0a1435;
+    font-size: 0.9rem;
+}
+
+
+/* ==== VIDEO SECTION ==== */
+.video-section {
+    margin-top: 4rem;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.video-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #0a1435;
+}
+
+/* Responsive YouTube Embed */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto; /* Center video */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 12px;
+}
+
+
+
+
+
+
+
+
+
 
 
