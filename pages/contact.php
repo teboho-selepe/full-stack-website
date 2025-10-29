@@ -46,6 +46,8 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
     </div>
 
+    <?php include __DIR__ . '/../includes/auth_modal.php'; ?>
+    
     <script>
     function closeModal() {
         document.getElementById('successModal').style.display = 'none';

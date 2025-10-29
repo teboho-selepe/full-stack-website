@@ -5,12 +5,9 @@ $active_form = $_SESSION['active_form'] ?? '';
 unset($_SESSION['alerts'], $_SESSION['active_form']);
 ?>
 
-    <!-- <section>
-        
-    </section> -->
-
+    
     <main class="wrap">
-        <!-- HERO / HOME -->
+        <!-- HOME -->
         <section id="home" class="hero">
             <div>
                 <h1> Hello <?=$name ?? 'Developer' ?>! Unlock your tech future — learn to code with confidence</h1>
@@ -71,10 +68,9 @@ unset($_SESSION['alerts'], $_SESSION['active_form']);
             </div>
         </section>
 
-        
-
     </main>
 
+    <!--  Show the alert message-->
     <?php if(!empty($alerts)): ?>
     <div class="alert-box" >
         <?php foreach($alerts as $alert): ?>
@@ -86,45 +82,7 @@ unset($_SESSION['alerts'], $_SESSION['active_form']);
     </div>
     <?php endif; ?>
 
-    <div class="auth-modal <?= $active_form === 'register' ? 'slide' : ($active_form === 'login' ? 'show' : ''); ?>">
-
-        <button class="close-btn-modal"><i class='bx  bxs-x'  ></i> </button>
-        
-        <div class="form-box login">
-            <h2>Login</h2>
-            <form action="controllers/auth_process.php" method="post">
-                <div class="input-box">
-                    <input type="email" name="email" placeholder="Email" required>
-                    <i class='bx  bxs-envelope'  ></i> 
-                </div>
-                <div class="input-box">
-                    <input type="password" name="password" placeholder="password" required>
-                    <i class='bx  bxs-lock'  ></i> 
-                </div>
-                <button type="submit" name="login_btn" class="btn">Login</button>
-                <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
-            </form>
-        </div>
-
-        <div class="form-box register">
-            <h2>Register</h2>
-            <form action="controllers/auth_process.php" method="post">
-                <div class="input-box">
-                    <input type="text" name="name" placeholder="Name" required>
-                    <i class='bx  bxs-user'  ></i> 
-                </div>
-                <div class="input-box">
-                    <input type="email" name="email" placeholder="Email" required>
-                    <i class='bx  bxs-envelope'  ></i> 
-                </div>
-                <div class="input-box">
-                    <input type="password" name="password" placeholder="password" required>
-                    <i class='bx  bxs-lock'  ></i> 
-                </div>
-                <button type="submit" name="register_btn" class="btn">Register</button>
-                <p>Already have an account? <a href="#" class="login-link">Login</a></p>
-            </form>
-        </div>
-    </div>
+    <!-- Authentication Modal -->
+    <?php include __DIR__ . '/includes/auth_modal.php'; ?> 
     
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

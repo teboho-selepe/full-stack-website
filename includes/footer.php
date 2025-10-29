@@ -1,3 +1,4 @@
+    
     <footer class="site-footer">
         <table style="width:100%;border-collapse:collapse; background: rgba(3, 3, 3, 0.8); backdrop-filter: blur(20px);">
             <tr>
@@ -26,4 +27,4 @@
     </footer>
     <script src="/web/script.js"></script>
     </body>
-    </html>
+</html>
