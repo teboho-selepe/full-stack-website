@@ -8,7 +8,7 @@ $name = $_SESSION['name'] ?? null;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Smart Path Tutors</title>
     <link rel="stylesheet" href="/web/assets/style.css">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 </head>

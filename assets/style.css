@@ -772,6 +772,43 @@ section{
     }
 }
 
+.success-modal {
+    position: fixed;
+    inset: 0;
+    display: none; /* hidden by default */
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+}
+
+.success-content {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(25px);
+    padding: 30px;
+    width: 350px;
+    border-radius: 15px;
+    text-align: center;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.success-content button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #00c853;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.success-content button:hover {
+    background: #009624;
+}
+
+
 
 
 

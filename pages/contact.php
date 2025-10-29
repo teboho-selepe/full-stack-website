@@ -10,7 +10,7 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <div class="contact-form-section">
-            <form action="send_contact.php" method="post" class="contact-form">
+            <form action="../controllers/send_contact.php" method="post" class="contact-form">
             
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -36,5 +36,21 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
         
     </section>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <h2>Message Sent</h2> <br>
+            <p>Thank you for contacting SmartPath Tutors! We will get back to you soon.</p><br>
+            <button onclick="closeModal()">OK</button>
+        </div>
+    </div>
+
+    <script>
+    function closeModal() {
+        document.getElementById('successModal').style.display = 'none';
+    }
+    </script>
+
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
