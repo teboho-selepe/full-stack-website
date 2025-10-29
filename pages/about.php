@@ -50,19 +50,12 @@ require_once __DIR__ . '/../includes/header.php';
 
             <div class="tutor-card">
                 <img src="../assets/tutor3.jpeg" alt="Tutor 3">
-                <h3>Sipho K.</h3>
+                <h3>Keneilwe M.</h3>
                 <p>Programming Logic Tutor</p>
                 <span class="skills">Algorithms • Python • Data Structures</span>
             </div>
 
         </div>
     </section>
-
-
-    <section class="about-cta">
-        <h2>Ready to Start Your Journey?</h2>
-        <a class="cta" href="/web/pages/contact.php">Book a Session</a>
-    </section>
-
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
