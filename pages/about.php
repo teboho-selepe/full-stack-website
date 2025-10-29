@@ -4,7 +4,7 @@ require_once __DIR__ . '/../includes/header.php';
 
     <section class="about-intro">
         <h2>Who We Are</h2>
-        <p>SmartPath Tutors is a tutoring platform designed to help university students master programming with confidence. We provide practical guidance in web development, software engineering, and logical problem solving through personalized and engaging lessons.</p>
+        <p>SmartPath Tutors is a tutoring platform designed to help university students master programming with confidence. We provide practical guidance in web development, software development, and logical problem solving through personalized and engaging lessons.</p>
     </section>
 
     <section class="about-mission">
@@ -26,12 +26,23 @@ require_once __DIR__ . '/../includes/header.php';
     <section class="about-approach">
         <h2>How We Teach</h2>
         <p>Our learning approach is simple: <strong>Learn → Practice → Build → Grow</strong>. We explain concepts step by step, guide you through code logic, and help you build real projects so you gain confidence and hands-on experience.</p>
+
+        <div class="video-container">
+            <h3>Building ATM Interface using Java</h3>
+            <iframe src="https://www.youtube.com/embed/XJOTMuVnils"
+                title="Java Development Tutorial for Beginners"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+        
     </section>
 
     <section class="about-team">
         <h2>Meet Our Tutors</h2>
         <p class="team-intro">Our tutoring team is made up of passionate developers who love teaching and helping students grow in tech.</p>
-        
+
         <div class="tutor-cards">
             
             <div class="tutor-card">
