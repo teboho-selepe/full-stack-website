@@ -6,17 +6,17 @@ unset($_SESSION['alerts'], $_SESSION['active_form']);
 ?>
 
     <!-- <section>
-        <h1>Hello <?=$name ?? 'World' ?>!</h1>
+        
     </section> -->
 
     <main class="wrap">
         <!-- HERO / HOME -->
         <section id="home" class="hero">
             <div>
-                <h1>Unlock your tech future — learn to code with confidence</h1>
+                <h1> Hello <?=$name ?? 'Developer' ?>! Unlock your tech future — learn to code with confidence</h1>
                 <p>Personalized tutoring in Web Development, Software Development and Programming Logic. Build portfolio-ready projects, master problem solving, and prepare for real internships.</p>
                 <div class="buttons">
-                    <a class="cta" href="#contact">Get Started</a>
+                    <a class="cta" href="pages/contact.php">Get Started</a>
                     <a style="padding:10px 14px;border-radius:10px;border:1px solid rgba(10,20,40,0.06);text-decoration:none;font-weight:700" href="pages/about.php">Why SmartPath</a>
                 </div>
 
@@ -35,6 +35,7 @@ unset($_SESSION['alerts'], $_SESSION['active_form']);
                         <p class="muted">Get clear, step-by-step help when deadlines matter.</p>
                     </div>
                 </div>
+                
             </div>
 
 

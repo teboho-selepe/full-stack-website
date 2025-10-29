@@ -9,9 +9,9 @@ require_once __DIR__ . '/../includes/header.php';
 
     <section class="about-mission">
         <h2>Our Mission</h2>
-        <p>To bridge the gap between academic learning and real-world software development by offering personalized learning that builds confidence, skills, and career readiness.</p>
+        <p>To bridge the gap between academic learning and real-world software development by offering personalized learning that builds confidence, skills, and career readiness.</p><br>
 
-        <h2>Why Choose Us?</h2>
+        <h3>Why Choose Us?</h3>
         <ul>
             <li>One-on-one personalized tutoring</li>
             <li>Project-based learning with real examples</li>
