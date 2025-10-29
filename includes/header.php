@@ -14,7 +14,11 @@ $name = $_SESSION['name'] ?? null;
 </head>
 <body>
 <header>
-    <a href="/web/index.php" class="logo">Logo</a>
+    
+    <a href="/web/index.php" class="logo">
+        <img src="/web/assets/logo.png" alt="SmartPath Tutoring Logo">
+    </a>
+
 
     <nav>
         <a href="/web/index.php">Home</a>
