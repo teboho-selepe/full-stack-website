@@ -46,21 +46,21 @@ require_once __DIR__ . '/../includes/header.php';
         <div class="tutor-cards">
             
             <div class="tutor-card">
-                <img src="../assets/tutor1.jpeg" alt="Tutor 1">
+                <img src="/web/assets/images/tutors/tutor1.jpeg" alt="Tutor 1">
                 <h3>Angel M.</h3>
                 <p>Web Development Tutor</p>
                 <span class="skills">HTML • CSS • JavaScript • PHP</span>
             </div>
 
             <div class="tutor-card">
-                <img src="../assets/tutor2.jpeg" alt="Tutor 2">
+                <img src="/web/assets/images/tutors/tutor2.jpeg" alt="Tutor 2">
                 <h3>Selepe T.</h3>
                 <p>Software Development Tutor</p>
                 <span class="skills">Java • Spring Boot • APIs • OOP</span>
             </div>
 
             <div class="tutor-card">
-                <img src="../assets/tutor3.jpeg" alt="Tutor 3">
+                <img src="/web/assets/images/tutors/tutor3.jpeg" alt="Tutor 3">
                 <h3>Keneilwe M.</h3>
                 <p>Programming Logic Tutor</p>
                 <span class="skills">Algorithms • Python • Data Structures</span>

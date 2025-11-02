@@ -4,7 +4,7 @@
         <div style="display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <!-- Logo Section -->
             <div style="text-align: center;">
-                <img src="/web/assets/logo.png" alt="SmartPath Tutoring Logo" style="height:120px; display:inline-block; margin-bottom:8px;">
+                <img src="/web/assets/images/logos/logo.png" alt="SmartPath Tutoring Logo" style="height:120px; display:inline-block; margin-bottom:8px;">
             </div>
 
             <!-- Quick Links -->

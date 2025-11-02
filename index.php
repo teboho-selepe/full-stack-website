@@ -51,17 +51,17 @@ unset($_SESSION['alerts'], $_SESSION['active_form']);
             <h2>What Our Students Say</h2>
             <div class="testimonial-cards">
                 <div class="card">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex Photo">
+                    <img src="/web/assets/images/testimonials/alex.jpg" alt="Alex Photo">
                     <p>"The one-on-one sessions helped me grasp complex concepts easily. Highly recommend!"</p>
                     <strong>- Alex P.</strong>
                 </div>
                 <div class="card">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria Photo">
+                    <img src="/web/assets/images/testimonials/maria.jpg" alt="Maria Photo">
                     <p>"Thanks to the project-based learning approach, I built a strong portfolio that landed me an internship."</p>
                     <strong>- Maria S.</strong>
                 </div>
                 <div class="card">
-                    <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="John Photo">
+                    <img src="/web/assets/images/testimonials/john.jpg" alt="John Photo">
                     <p>"The exam support was a lifesaver! Clear explanations made all the difference."</p>
                     <strong>- John D.</strong>
                 </div>
