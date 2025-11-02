@@ -1,13 +1,19 @@
+// Get all the DOM elements we need
 const authModal = document.querySelector('.auth-modal');
 const loginLink = document.querySelector('.login-link');
 const registerLink = document.querySelector('.register-link');
 const loginBtnModal = document.querySelector('.login-btn-modal');
 const closeBtnModal = document.querySelector('.close-btn-modal');
 const avatarCicle = document.querySelector('.avatar-cicle');
-const profileBox = document.querySelector('.profile-box:not(.notification-box)'); // Get profile box only
+const profileBox = document.querySelector('.profile-box:not(.notification-box)');
 const notificationBtn = document.querySelector('.notification-btn');
 const notificationBox = document.querySelector('.notification-box');
 const alertBox = document.querySelector('.alert-box');
+
+// Mobile menu elements
+const menuToggle = document.querySelector('.menu-toggle');
+const nav = document.querySelector('nav');
+const header = document.querySelector('header');
 
 
 registerLink.addEventListener('click', () => authModal.classList.add('slide'));
@@ -50,8 +56,55 @@ document.addEventListener('click', (e) => {
     if (notificationBox) notificationBox.classList.remove('show');
 });
 
+// Handle mobile menu
+if (menuToggle && nav) {
+    let lastScrollTop = 0;
+
+    // Toggle menu on button click
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nav.classList.toggle('show');
+        const icon = menuToggle.querySelector('i');
+        icon.className = nav.classList.contains('show') ? 'bx bx-x' : 'bx bx-menu';
+    });
+
+    // Close menu when clicking a link
+    nav.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            nav.classList.remove('show');
+            menuToggle.querySelector('i').className = 'bx bx-menu';
+        }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('nav') && 
+            !e.target.closest('.menu-toggle') && 
+            nav.classList.contains('show')) {
+            nav.classList.remove('show');
+            menuToggle.querySelector('i').className = 'bx bx-menu';
+        }
+    });
+
+    // Handle header visibility on scroll for mobile
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 70) {
+            // Scrolling down & past header - hide it
+            header.style.transform = 'translateY(-100%)';
+            nav.classList.remove('show');
+            menuToggle.querySelector('i').className = 'bx bx-menu';
+        } else {
+            // Scrolling up - show header
+            header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+}
+
 if(alertBox){
-    
     setTimeout(() => alertBox.classList.add('show'), 50);
 
     setTimeout(() => {

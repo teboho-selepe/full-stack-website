@@ -16,11 +16,13 @@ $name = $_SESSION['name'] ?? null;
 
 <body>
     <header>
-        
         <a href="/web/index.php" class="logo">
             <img src="/web/assets/logo.png" alt="SmartPath Tutoring Logo">
         </a>
 
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <i class='bx bx-menu'></i>
+        </button>
 
         <nav>
             <a href="/web/index.php">Home</a>
