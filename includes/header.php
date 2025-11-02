@@ -30,6 +30,18 @@ $name = $_SESSION['name'] ?? null;
 
         <div class="user-auth">
             <?php if (!empty($name)): ?>
+
+            <!-- Notification bell (visible when logged in) -->
+            <div class="profile-box notification-box">
+                <button class="notification-btn" aria-label="Notifications">
+                    <i class='bx bx-bell'></i>
+                    <span class="notif-count">0</span>
+                </button>
+                <div class="dropdown">
+                    <a href="#">No new notifications</a>
+                </div>
+            </div>
+
             <div class="profile-box">
                 <div class="avatar-cicle"><?= strtoupper($name[0]) ?></div>
                 <div class="dropdown">

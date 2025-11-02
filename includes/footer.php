@@ -15,7 +15,13 @@
                 <td style="padding:16px ;text-align:right;vertical-align:top;width:33%; color:#fff;" >
                     <strong>Contact</strong><br>
                     <span style="font-size:14px;">Email: info@smartpath.com</span><br>
-                    <span style="font-size:14px;">Phone: +27 12 345 6789</span>
+                    <span style="font-size:14px;">Phone: +27 12 345 6789</span><br>
+                        <br>
+                    <strong>Address</strong><br>
+                    <span style="font-size:14px;">2 Cassandra Avenue</span><br>
+                    <span style="font-size:14px;">Bedworth Park</span><br>
+                    <span style="font-size:14px;">Vereeniging</span><br>
+                    <span style="font-size:14px;">1939</span>
                 </td>
             </tr>
             <tr>

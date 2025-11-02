@@ -243,7 +243,44 @@ section{
     font-size: 25px;
     color: #222;
     font-weight: 600;
- 
+}
+
+/* Style the notification button/bell */
+.notification-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+    margin-right: 15px;
+}
+
+.notification-btn i {
+    font-size: 24px;
+    color: #fff;
+}
+
+.notification-btn .notif-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #f00;
+    color: #fff;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+/* Align notification box and profile box side by side */
+.user-auth {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .profile-box .dropdown{
@@ -261,6 +298,12 @@ section{
 
 .profile-box.show .dropdown{
     display: flex;
+}
+
+/* Style notification dropdown specifically */
+.notification-box .dropdown {
+    width: 280px; /* wider for notifications */
+    right: -20px; /* offset to align better */
 }
 
 .profile-box .dropdown a{
