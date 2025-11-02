@@ -5,7 +5,7 @@ require_once __DIR__ . '/../includes/header.php';
     <section class="contact-intro">
 
         <div class="contact-info">
-            <h2>Contact SmartPath Tutors</h2>
+            <h2>Contact US</h2>
             <p>Have questions or want to start learning with us? Fill out the form below and let us know which module you are interested in. We'll get back to you as soon as possible.</p>
         </div>
 

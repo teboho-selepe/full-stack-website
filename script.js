@@ -59,3 +59,50 @@ if(alertBox){
         setTimeout(() => alertBox.remove(), 1000);
     }, 6000);
 }
+
+// --- Image lightbox: open clicked images in a fullscreen modal ---
+(() => {
+    const selectors = ['.tutor-card img', '.testimonial-cards .card img', '.card img'];
+    const selector = selectors.join(', ');
+
+    // Create modal element once
+    let modal = document.querySelector('.image-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'image-modal';
+        modal.innerHTML = `
+            <button class="close-btn" aria-label="Close preview">&times;</button>
+            <img src="" alt="Preview">
+        `;
+        document.body.appendChild(modal);
+    }
+
+    const modalImg = modal.querySelector('img');
+    const closeBtn = modal.querySelector('.close-btn');
+
+    // Open modal when clicking matching images
+    document.addEventListener('click', (e) => {
+        const img = e.target.closest(selector);
+        if (!img) return;
+        e.stopPropagation();
+        modalImg.src = img.src;
+        modalImg.alt = img.alt || 'Image preview';
+        modal.classList.add('show');
+        // prevent body scroll while open
+        document.documentElement.style.overflow = 'hidden';
+    });
+
+    // Close handlers
+    function closeModal() {
+        modal.classList.remove('show');
+        modalImg.src = '';
+        document.documentElement.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', (e) => { e.stopPropagation(); closeModal(); });
+    modal.addEventListener('click', (e) => {
+        // clicking outside the image closes
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+})();

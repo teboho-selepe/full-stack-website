@@ -551,7 +551,8 @@ section{
 .about-intro h2,
 .about-mission h2,
 .about-approach h2,
-.about-team h2 {
+.about-team h2, 
+.contact-info h2 {
     font-size: 38px;
     font-weight: 700;
     color: #003366;
@@ -737,7 +738,7 @@ section{
 .contact-info h2 {
     font-size: 2rem;
     margin-bottom: 15px;
-    color: #222;
+    
 }
 
 .contact-info p {
@@ -849,6 +850,58 @@ section{
 
 .success-content button:hover {
     background: #009624;
+}
+
+/* Image lightbox modal */
+.image-modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+}
+
+.image-modal.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.image-modal img{
+    max-width: 92%;
+    max-height: 92%;
+    border-radius: 8px;
+    box-shadow: 0 18px 60px rgba(0,0,0,0.6);
+    transform: translateY(0);
+}
+
+.image-modal .close-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Make images look clickable */
+.tutor-card img,
+.testimonial-cards .card img,
+.card img{
+    cursor: zoom-in;
+    transition: transform 120ms ease;
+}
+
+.tutor-card img:active,
+.testimonial-cards .card img:active,
+.card img:active{
+    transform: scale(0.98);
 }
 
 
