@@ -1,5 +1,4 @@
-    
-    <footer class="site-footer">
+<footer class="site-footer">
     <div style="width:100%; background: rgba(3, 3, 3, 0.8); backdrop-filter: blur(20px); padding: 20px;">
         <div style="display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <!-- Logo Section -->
@@ -14,6 +13,15 @@
                     <a href="/web/index.php" class="footer-link">Home</a>
                     <a href="/web/pages/about.php" class="footer-link">About</a>
                     <a href="/web/pages/contact.php" class="footer-link">Contact</a>
+                </div>
+                <!-- Social Icons -->
+                <div style="display:flex; justify-content:center; gap:18px; margin-top:18px;">
+                    <a href="https://github.com/teboho-selepe/full-stack-website" target="_blank" aria-label="GitHub" class="footer-social-icon">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="footer-social-icon">
+                        <i class='bx bxl-facebook'></i>
+                    </a>
                 </div>
             </div>
 
@@ -42,19 +50,28 @@
     </div>
 </footer>
 
+<!-- BoxIcons CDN for social icons -->
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
 <!-- Add responsive footer styles -->
 <style>
+.footer-social-icon i {
+    font-size: 32px !important;
+    color: #fff;
+    transition: color 0.2s;
+}
+.footer-social-icon:hover i {
+    color: #00aaff;
+}
 @media (min-width: 768px) {
     .site-footer img {
         height: 160px !important;
     }
-    
     .site-footer > div > div {
         grid-template-columns: repeat(3, 1fr) !important;
         gap: 40px !important;
         text-align: left !important;
     }
-    
     .site-footer > div > div > div {
         text-align: left !important;
     }
