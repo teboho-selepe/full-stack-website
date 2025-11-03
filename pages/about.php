@@ -5,6 +5,11 @@ require_once __DIR__ . '/../includes/header.php';
     <section class="about-intro">
         <h2>Who We Are</h2>
         <p>SmartPath Tutors is a tutoring platform designed to help university students master programming with confidence. We provide practical guidance in web development, software development, and logical problem solving through personalized and engaging lessons.</p>
+
+        <div class="intro-video">
+            <video src="/web/assets/videos/intro_video.mp4" controls style="width:100%; max-width:600px; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.12); background:#222;"></video>
+        </div>
+        
     </section>
 
     <section class="about-mission">

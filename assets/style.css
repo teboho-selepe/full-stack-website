@@ -1123,6 +1123,28 @@ section{
     transform: scale(0.98);
 }
 
+/* About page intro video styles */
+.intro-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 32px 0 0 0;
+    width: 100%;
+}
+.intro-video video {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    background: #222;
+}
+@media (max-width: 700px) {
+    .intro-video video {
+        max-width: 98vw;
+        min-height: 180px;
+    }
+}
+
 
 
 
