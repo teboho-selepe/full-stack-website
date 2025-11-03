@@ -19,3 +19,10 @@ A modern, responsive PHP web application with authentication, notifications, and
 - JavaScript (interactive UI)
 - CSS (responsive design)
 - BoxIcons (icon library)
+
+## Folder Structure
+
+- /assets (images and style)
+- /controllers(handle the login and the form submission logic)
+- /includes (footer and the header)
+- /pages (about and contact pages)
