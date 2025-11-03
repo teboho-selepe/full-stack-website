@@ -86,19 +86,33 @@ if (menuToggle && nav) {
         }
     });
 
-    // Handle header visibility on scroll for mobile
+    // Handle header visibility and appearance on scroll
+    let scrollTimeout;
     window.addEventListener('scroll', () => {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > lastScrollTop && scrollTop > 70) {
-            // Scrolling down & past header - hide it
-            header.style.transform = 'translateY(-100%)';
-            nav.classList.remove('show');
-            menuToggle.querySelector('i').className = 'bx bx-menu';
+        // Update header background opacity based on scroll position
+        if (scrollTop > 50) {
+            header.style.backgroundColor = 'rgba(3, 3, 3, 0.98)';
+            header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
         } else {
-            // Scrolling up - show header
-            header.style.transform = 'translateY(0)';
+            header.style.backgroundColor = 'rgba(3, 3, 3, 0.95)';
+            header.style.borderBottom = 'none';
         }
+
+        // Handle header visibility with some delay for smoother experience
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            if (scrollTop > lastScrollTop && scrollTop > 70) {
+                // Scrolling down & past header - hide it
+                header.style.transform = 'translateY(-100%)';
+                nav.classList.remove('show');
+                menuToggle.querySelector('i').className = 'bx bx-menu';
+            } else {
+                // Scrolling up - show header
+                header.style.transform = 'translateY(0)';
+            }
+        }, 50); // Small delay for smoother behavior
         
         lastScrollTop = scrollTop;
     });
