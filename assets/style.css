@@ -208,7 +208,7 @@ section{
     overflow: hidden;
     transform: scale(0);
     transition: height .2s ease, transform .2s ease;
-    z-index: 99;
+    z-index: 10001;
     padding: 0 10px;
 }
 
@@ -418,9 +418,10 @@ section{
     top: 50px;
     right: 0;
     width: 150px;
-    background: #fff;
+    background: rgba(3,3,3,0.98); /* dark dropdown to match header */
+    color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .6);
     overflow: hidden;
     display: none;
     flex-direction: column;
@@ -433,8 +434,10 @@ section{
 
 /* Notification styles */
 .notification-box .dropdown {
-    width: 280px;
+    width: 320px;
     right: -20px;
+    background: rgba(3,3,3,0.98); /* dark background */
+    color: #fff;
 }
 
 /* Conversation/notification list inside dropdown */
@@ -449,11 +452,78 @@ section{
 }
 
 .notification-box .dropdown .notif-item {
-    background: #fff; /* light background so message text can be black */
+    background: #0b1220; /* dark item background */
     padding: 10px;
     border-radius: 8px;
-    color: #111; /* message color: black/dark */
-    border: 1px solid rgba(0,0,0,0.06);
+    color: #fff; /* message color: light */
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Make message text readable (override any leftover dark text rules) */
+.notification-box .dropdown .notif-item .notif-message {
+    color: rgba(230,240,255,0.95);
+}
+
+/* Green theme for user-sent messages and reply UI */
+.notification-box .dropdown .notif-item[data-type="user"] {
+    background: #083618; /* dark green */
+    border-color: rgba(11,143,59,0.12);
+}
+
+.notification-box .dropdown .notif-item[data-type="user"] .notif-sender {
+    color: #dfffe0;
+}
+
+.notification-box .dropdown .notif-item[data-type="user"] .notif-message {
+    color: #eaffea;
+}
+
+.notification-box .dropdown .notif-item[data-type="user"] .notif-time {
+    color: rgba(230,255,225,0.8);
+}
+
+.notification-box .dropdown .notif-item[data-type="user"] .notif-module {
+    background: rgba(11,143,59,0.12);
+    color: #c8ffd3;
+}
+
+/* Inputs inside user reply forms get a subtle green tint */
+.notification-box .dropdown .notif-item[data-type="user"] .notif-reply-form textarea,
+.notification-box .dropdown .notif-item[data-type="user"] .notif-reply-form input {
+    background: rgba(11,143,59,0.06);
+    border: 1px solid rgba(11,143,59,0.18);
+    color: #eaffea;
+}
+
+.notification-box .dropdown .notif-item[data-type="user"] .notif-reply-form textarea::placeholder,
+.notification-box .dropdown .notif-item[data-type="user"] .notif-reply-form input::placeholder {
+    color: rgba(230,255,230,0.6);
+}
+
+/* Green buttons for user messages */
+.notification-box .dropdown .notif-item[data-type="user"] .notif-reply-btn,
+.notification-box .dropdown .notif-item[data-type="user"] .notif-send-btn,
+.notification-box .dropdown .notif-item[data-type="user"] .notif-cancel-btn,
+.notification-box .dropdown .notif-reply-form-top .notif-send-btn,
+.notification-box .dropdown .notif-reply-form-top .notif-cancel-btn {
+    background: linear-gradient(180deg,#0b8f3b,#06672a);
+    color: #eaffea;
+    border: 1px solid rgba(0,0,0,0.12);
+}
+
+.notification-box .dropdown .notif-item[data-type="user"] .notif-reply-btn:hover,
+.notification-box .dropdown .notif-item[data-type="user"] .notif-send-btn:hover,
+.notification-box .dropdown .notif-item[data-type="user"] .notif-cancel-btn:hover,
+.notification-box .dropdown .notif-reply-form-top .notif-send-btn:hover,
+.notification-box .dropdown .notif-reply-form-top .notif-cancel-btn:hover {
+    filter: brightness(1.05);
+}
+
+/* Make top 'New Message' button green by default to indicate user compose */
+.notification-box .dropdown .new-message-btn {
+    background: linear-gradient(180deg,#0b8f3b,#06672a);
+    color: #eaffea;
+    border: 1px solid rgba(0,0,0,0.12);
 }
 
 .notification-box .dropdown .notif-sender {
@@ -476,11 +546,65 @@ section{
 
 .notification-box .dropdown .notif-module {
     font-size: 12px;
-    color: #0a3d66;
-    background: #eef6ff;
+    color: #cfe6ff;
+    background: rgba(10,60,110,0.12);
     padding: 4px 8px;
     border-radius: 12px;
     font-weight: 600;
+}
+
+/* Reply / compose form inside notification dropdown */
+.notification-box .dropdown .notif-reply-form textarea,
+.notification-box .dropdown .notif-reply-form input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.notification-box .dropdown .notif-reply-form textarea::placeholder,
+.notification-box .dropdown .notif-reply-form input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.notification-box .dropdown .notif-reply-form textarea:focus,
+.notification-box .dropdown .notif-reply-form input:focus {
+    outline: none;
+    border-color: rgba(0,123,255,0.9);
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.12);
+}
+
+/* Top action area styling */
+.notification-box .dropdown .notif-actions-top {
+    padding: 10px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    background: transparent;
+}
+
+.notification-box .dropdown .new-message-btn,
+.notification-box .dropdown .notif-reply-btn,
+.notification-box .dropdown .notif-send-btn,
+.notification-box .dropdown .notif-cancel-btn {
+    background: #142030;
+    color: #e6f0ff;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.notification-box .dropdown .new-message-btn:hover,
+.notification-box .dropdown .notif-reply-btn:hover,
+.notification-box .dropdown .notif-send-btn:hover,
+.notification-box .dropdown .notif-cancel-btn:hover {
+    background: rgba(255,255,255,0.04);
 }
 
 @media (max-width: 480px) {
@@ -508,12 +632,21 @@ section{
     }
 }
 
-.profile-box .dropdown a{
+.profile-box:not(.notification-box) .dropdown a{
     padding: 12px 20px;
-    color: #222;
+    color: #fff; /* make profile dropdown links white */
     text-decoration: none;
     font-size: 14.5px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* keep notification dropdown links readable (if any links exist there) */
+.notification-box .dropdown a{
+    padding: 12px 20px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14.5px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 .alert-box{
@@ -1000,6 +1133,54 @@ section{
     padding: 60px 20px;
     background-color: #f9f9f9;
     padding-top: 120px; 
+}
+
+/* Contact page animated note */
+.contact-note{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    padding:10px 12px;
+    border-radius:8px;
+    background: linear-gradient(90deg, rgba(11,143,59,0.12), rgba(11,143,59,0.06));
+    border: 1px solid rgba(11,143,59,0.18);
+    color: #063a20;
+    font-weight:600;
+    max-width:520px;
+    animation: contactNoteIn 700ms ease both;
+}
+
+.contact-note .note-icon{
+    font-size:20px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:34px;
+    height:34px;
+    border-radius:8px;
+    background: linear-gradient(180deg,#0b8f3b,#06672a);
+    color: #eaffea;
+    box-shadow: 0 6px 14px rgba(6,103,42,0.14);
+    transform-origin:center;
+    animation: notePulse 1400ms ease-in-out infinite;
+}
+
+.contact-note .note-text{
+    font-size:14px;
+    color:#083618;
+    line-height:1.3;
+}
+
+@keyframes contactNoteIn{
+    from{opacity:0; transform: translateY(6px);}
+    to{opacity:1; transform: translateY(0);}
+}
+
+@keyframes notePulse{
+    0%{ transform: scale(1);} 
+    50%{ transform: scale(1.06);} 
+    100%{ transform: scale(1);} 
 }
 
 .contact-info {

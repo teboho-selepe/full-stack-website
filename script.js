@@ -99,14 +99,120 @@ if (notificationBtn) {
             // Render conversation-like list
             dropdown.innerHTML = '<div class="notif-conversation"></div>';
             const conv = dropdown.querySelector('.notif-conversation');
-            conv.innerHTML = items.map(item => {
+            // Top actions: allow composing a new message
+            const topActions = `<div class="notif-actions-top" style="padding:8px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;align-items:center;">
+                    <button class="new-message-btn" style="padding:6px 10px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff;border-radius:6px;">New Message</button>
+                    <span style="font-size:12px;color:rgba(255,255,255,0.7)">Send a message without leaving the page</span>
+                </div>`;
+
+            conv.innerHTML = topActions + items.map(item => {
                 const time = item.created_at ? new Date(item.created_at).toLocaleString() : '';
                 const moduleTag = item.module ? `<div class="notif-module">${escapeHtml(item.module)}</div>` : '';
-                return `\n                    <div class="notif-item">\n                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">\n                            <div class="notif-sender">${escapeHtml(item.sender)}</div>\n                            ${moduleTag}\n                        </div>\n                        <div class="notif-message">${escapeHtml(item.message)}</div>\n                        <div class="notif-time">${time}</div>\n                    </div>\n                `;
+                return `\n                    <div class="notif-item" data-id="${escapeHtml(item.id)}" data-type="${escapeHtml(item.type)}">\n                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">\n                            <div class="notif-sender">${escapeHtml(item.sender)}</div>\n                            ${moduleTag}\n                        </div>\n                        <div class="notif-message">${escapeHtml(item.message)}</div>\n                        <div class="notif-time">${time}</div>\n                        <div class="notif-actions" style="margin-top:8px;">\n                            <button class="notif-reply-btn" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff">Reply</button>\n                        </div>\n                    </div>\n                `;
             }).join('');
 
             // Make dropdown scrollable if long
             if (conv.scrollHeight > 400) conv.style.maxHeight = '400px';
+
+            // Event delegation inside conversation: handle reply and new message actions
+            conv.addEventListener('click', async (ev) => {
+                const replyBtn = ev.target.closest('.notif-reply-btn');
+                const newMsgBtn = ev.target.closest('.new-message-btn');
+                const cancelBtn = ev.target.closest('.notif-cancel-btn');
+                const sendBtn = ev.target.closest('.notif-send-btn');
+
+                if (cancelBtn) {
+                    const form = cancelBtn.closest('.notif-reply-form');
+                    if (form) form.remove();
+                    return;
+                }
+
+                if (replyBtn) {
+                    const itemEl = replyBtn.closest('.notif-item');
+                    if (!itemEl) return;
+                    // Prevent multiple forms on same item
+                    if (itemEl.querySelector('.notif-reply-form')) return;
+
+                    const formHtml = `\n                        <div class="notif-reply-form" style="margin-top:8px;">\n                            <textarea class="notif-reply-text" rows="3" placeholder="Write your reply..." style="width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff"></textarea>\n                            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">\n                                <input class="notif-module-input" placeholder="Module (optional)" style="padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff">\n                                <button class="notif-send-btn" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff">Send</button>\n                                <button class="notif-cancel-btn" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff">Cancel</button>\n                            </div>\n                        </div>\n                    `;
+                    itemEl.insertAdjacentHTML('beforeend', formHtml);
+                    const textarea = itemEl.querySelector('.notif-reply-text');
+                    if (textarea) textarea.focus();
+                    return;
+                }
+
+                if (newMsgBtn) {
+                    // only one top-level form allowed
+                    if (conv.querySelector('.notif-reply-form')) return;
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'notif-reply-form-top';
+                    wrapper.innerHTML = `\n                        <div class="notif-reply-form" style="padding:8px;">\n                            <textarea class="notif-reply-text" rows="3" placeholder="Write your message..." style="width:100%;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff"></textarea>\n                            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:6px;">\n                                <input class="notif-module-input" placeholder="Module (optional)" style="padding:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff">\n                                <button class="notif-send-btn" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff">Send</button>\n                                <button class="notif-cancel-btn" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff">Cancel</button>\n                            </div>\n                        </div>\n                    `;
+                    conv.prepend(wrapper);
+                    const textarea = conv.querySelector('.notif-reply-form .notif-reply-text');
+                    if (textarea) textarea.focus();
+                    return;
+                }
+
+                if (sendBtn) {
+                    // figure out which form this belongs to
+                    const form = sendBtn.closest('.notif-reply-form');
+                    if (!form) return;
+                    const textEl = form.querySelector('.notif-reply-text');
+                    const moduleEl = form.querySelector('.notif-module-input');
+                    const text = textEl ? textEl.value.trim() : '';
+                    const moduleVal = moduleEl ? moduleEl.value.trim() : '';
+                    if (!text) {
+                        alert('Please enter a message');
+                        return;
+                    }
+
+                    // determine reply target if any
+                    const parentItem = form.closest('.notif-item');
+                    const parentId = parentItem ? parentItem.getAttribute('data-id') : null;
+
+                    // Send via AJAX to new endpoint
+                    try {
+                        const fd = new FormData();
+                        fd.append('message', text);
+                        fd.append('module', moduleVal);
+                        if (parentId) fd.append('reply_to', parentId);
+
+                        const res = await fetch('/web/controllers/send_message_ajax.php', { method: 'POST', credentials: 'same-origin', body: fd });
+                        const j = await res.json();
+                        if (!j.success) {
+                            alert(j.error || 'Failed to send');
+                            return;
+                        }
+
+                        // Insert the new notification at top of list (after top actions)
+                        const newNotif = j.notification;
+                        const notifHtml = `\n                            <div class="notif-item" data-id="${escapeHtml(newNotif.id)}" data-type="${escapeHtml(newNotif.type)}">\n                                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">\n                                    <div class="notif-sender">${escapeHtml(newNotif.sender)}</div>\n                                    ${newNotif.module ? `<div class=\"notif-module\">${escapeHtml(newNotif.module)}</div>` : ''}\n                                </div>\n                                <div class="notif-message">${escapeHtml(newNotif.message)}</div>\n                                <div class="notif-time">${new Date(newNotif.created_at).toLocaleString()}</div>\n                                <div class="notif-actions" style="margin-top:8px;"><button class="notif-reply-btn" style="padding:6px 10px;border-radius:6px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff">Reply</button></div>\n                            </div>\n                        `;
+
+                        // place after top actions
+                        const firstChild = conv.querySelector(':scope > *:nth-child(1)');
+                        if (firstChild) {
+                            // if top actions exists, insert after it
+                            if (firstChild.classList.contains('notif-actions-top')) {
+                                firstChild.insertAdjacentHTML('afterend', notifHtml);
+                            } else {
+                                conv.insertAdjacentHTML('afterbegin', notifHtml);
+                            }
+                        } else {
+                            conv.insertAdjacentHTML('afterbegin', notifHtml);
+                        }
+
+                        // update count
+                        const countEl = notificationBtn.querySelector('.notif-count');
+                        countEl.textContent = parseInt(countEl.textContent || '0', 10) + 1;
+
+                        // remove form
+                        form.remove();
+
+                    } catch (err) {
+                        console.error('Send failed', err);
+                        alert('Failed to send message');
+                    }
+                }
+            });
 
         } catch (err) {
             dropdown.innerHTML = '<div style="padding:14px;color:#fff;">Error loading notifications</div>';

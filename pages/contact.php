@@ -7,6 +7,10 @@ require_once __DIR__ . '/../includes/header.php';
         <div class="contact-info">
             <h2>Contact US</h2>
             <p>Have questions or want to start learning with us? Fill out the form below and let us know which module you are interested in. We'll get back to you as soon as possible.</p>
+            <div class="contact-note" role="status" aria-live="polite">
+                <i class="bx bx-mail-send note-icon" aria-hidden="true"></i>
+                <div class="note-text">Create an account using the email you used to send the message to track or check available messages.</div>
+            </div>
         </div>
 
         <div class="contact-form-section">
