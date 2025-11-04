@@ -39,6 +39,8 @@ if (isset($_POST['login_btn'])){
 
     if ($user && password_verify($password, $user['password'])){
         $_SESSION['name'] = $user['name'];
+        // store email in session so other endpoints (notifications) can identify the user
+        $_SESSION['email'] = $user['email'];
         $_SESSION['alerts'][] = [
             'type' => 'success',
             'message' => 'Login successful.'

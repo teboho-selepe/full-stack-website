@@ -437,6 +437,60 @@ section{
     right: -20px;
 }
 
+/* Conversation/notification list inside dropdown */
+.notification-box .dropdown .notif-conversation {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    max-height: 320px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.notification-box .dropdown .notif-item {
+    background: #fff; /* light background so message text can be black */
+    padding: 10px;
+    border-radius: 8px;
+    color: #111; /* message color: black/dark */
+    border: 1px solid rgba(0,0,0,0.06);
+}
+
+.notification-box .dropdown .notif-sender {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.notification-box .dropdown .notif-message {
+    font-size: 13px;
+    color: #111; /* make message text black/dark */
+    margin-bottom: 6px;
+}
+
+.notification-box .dropdown .notif-time {
+    font-size: 11px;
+    color: #666;
+    text-align: right;
+}
+
+.notification-box .dropdown .notif-module {
+    font-size: 12px;
+    color: #0a3d66;
+    background: #eef6ff;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .notification-box .dropdown {
+        width: calc(100vw - 40px);
+        right: -50%;
+        transform: translateX(25%);
+    }
+}
+
 @media (max-width: 480px) {
     .notification-box .dropdown {
         width: calc(100vw - 40px);

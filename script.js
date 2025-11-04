@@ -34,16 +34,95 @@ if (avatarCicle) {
     });
 }
 
+// Update notification count on page load (so badge reflects existing messages)
+async function updateNotificationCount() {
+    if (!notificationBtn) return;
+    const countEl = notificationBtn.querySelector('.notif-count');
+    try {
+        const res = await fetch('/web/controllers/get_notifications.php', { credentials: 'same-origin' });
+        if (!res.ok) {
+            // not authenticated or no access
+            countEl.textContent = '0';
+            return;
+        }
+        const data = await res.json();
+        if (!data.success || !Array.isArray(data.notifications)) {
+            countEl.textContent = '0';
+            return;
+        }
+        countEl.textContent = data.notifications.length;
+    } catch (err) {
+        console.error('Failed to update notification count', err);
+        const countEl = notificationBtn.querySelector('.notif-count');
+        if (countEl) countEl.textContent = '0';
+    }
+}
+
+// Run count update after initial load
+updateNotificationCount();
+
 // Handle notification bell click
 if (notificationBtn) {
-    notificationBtn.addEventListener('click', (e) => {
+    notificationBtn.addEventListener('click', async (e) => {
         e.stopPropagation(); // Prevent document click from immediately closing it
-        if (notificationBox) {
-            notificationBox.classList.toggle('show');
-            // Close profile dropdown if open
-            if (profileBox) profileBox.classList.remove('show');
+        if (!notificationBox) return;
+
+        // Close profile dropdown if open
+        if (profileBox) profileBox.classList.remove('show');
+
+        const dropdown = notificationBox.querySelector('.dropdown');
+        // Show loading state
+        dropdown.innerHTML = '<div style="padding:14px;color:#fff;">Loading...</div>';
+        notificationBox.classList.add('show');
+
+        try {
+            const res = await fetch('/web/controllers/get_notifications.php', { credentials: 'same-origin' });
+            if (!res.ok) {
+                dropdown.innerHTML = '<div style="padding:14px;color:#fff;">Could not load notifications.</div>';
+                return;
+            }
+            const data = await res.json();
+            if (!data.success) {
+                dropdown.innerHTML = `<div style="padding:14px;color:#fff;">${data.error || 'No notifications'}</div>`;
+                return;
+            }
+
+            const items = data.notifications || [];
+            const countEl = notificationBtn.querySelector('.notif-count');
+            countEl.textContent = items.length;
+
+            if (items.length === 0) {
+                dropdown.innerHTML = '<div style="padding:14px;color:#fff;">No new notifications</div>';
+                return;
+            }
+
+            // Render conversation-like list
+            dropdown.innerHTML = '<div class="notif-conversation"></div>';
+            const conv = dropdown.querySelector('.notif-conversation');
+            conv.innerHTML = items.map(item => {
+                const time = item.created_at ? new Date(item.created_at).toLocaleString() : '';
+                const moduleTag = item.module ? `<div class="notif-module">${escapeHtml(item.module)}</div>` : '';
+                return `\n                    <div class="notif-item">\n                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">\n                            <div class="notif-sender">${escapeHtml(item.sender)}</div>\n                            ${moduleTag}\n                        </div>\n                        <div class="notif-message">${escapeHtml(item.message)}</div>\n                        <div class="notif-time">${time}</div>\n                    </div>\n                `;
+            }).join('');
+
+            // Make dropdown scrollable if long
+            if (conv.scrollHeight > 400) conv.style.maxHeight = '400px';
+
+        } catch (err) {
+            dropdown.innerHTML = '<div style="padding:14px;color:#fff;">Error loading notifications</div>';
+            console.error(err);
         }
     });
+}
+
+// small helper to avoid XSS when injecting server data
+function escapeHtml(unsafe) {
+    return String(unsafe)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
 }
 
 // Close dropdowns when clicking outside
