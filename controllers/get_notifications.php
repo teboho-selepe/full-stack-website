@@ -17,17 +17,49 @@ if (empty($_SESSION['email'])) {
 
 $recipient = $_SESSION['email'];
 
-// Using `contact_messages` table (columns: id, name, email, module, message, created_at)
-// We will fetch messages where the `email` column matches the logged-in user's email.
-// Prepare statement to avoid SQL injection
-if ($stmt = $conn->prepare("SELECT id, name, module, message, created_at FROM contact_messages WHERE email = ? ORDER BY created_at DESC LIMIT 100")) {
-    $stmt->bind_param('s', $recipient);
+// Get both messages and replies
+$sql = "SELECT 
+    source_id as id,
+    sender_name,
+    module,
+    message,
+    created_at,
+    type
+FROM (
+    SELECT 
+        m.id as source_id,
+        m.name as sender_name,
+        m.module,
+        m.message,
+        m.created_at,
+        'user' as type
+    FROM contact_messages m
+    WHERE m.email = ?
+    
+    UNION ALL
+    
+    SELECT 
+        CONCAT(m.id, '_reply') as source_id,
+        'Admin' as sender_name,
+        m.module,
+        r.reply_text as message,
+        r.created_at,
+        'admin' as type
+    FROM contact_messages m
+    INNER JOIN message_replies r ON m.id = r.message_id
+    WHERE m.email = ?
+) combined
+ORDER BY created_at DESC
+LIMIT 100";
+
+if ($stmt = $conn->prepare($sql)) {
+    $stmt->bind_param("ss", $recipient, $recipient);
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         while ($row = $result->fetch_assoc()) {
             $resp['notifications'][] = [
                 'id' => $row['id'],
-                'sender' => $row['name'],
+                'sender' => $row['sender_name'],
                 'module' => $row['module'],
                 'message' => $row['message'],
                 'created_at' => $row['created_at']
