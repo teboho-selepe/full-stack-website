@@ -66,7 +66,7 @@ require_once __DIR__ . '/../includes/header.php';
 
             <div class="tutor-card">
                 <img src="/web/assets/images/tutors/tutor3.jpeg" alt="Tutor 3">
-                <h3>Keneilwe M.</h3>
+                <h3>Keneilwe R.</h3>
                 <p>Programming Logic Tutor</p>
                 <span class="skills">Algorithms • Python • Data Structures</span>
             </div>
